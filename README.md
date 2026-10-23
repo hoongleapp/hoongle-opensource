@@ -19,6 +19,13 @@ used in the app is provided here (see Releases).
 
 - 맥판의 자바 런타임은 Homebrew openjdk@21 (21.0.12.1, 패치 없음)을 jlink 로 줄인 것입니다.
   The Mac runtime is Homebrew openjdk@21 (21.0.12.1, no patches) reduced with jlink.
+- 1.0.0 부터 맥판은 그 런타임의 네이티브 라이브러리 다섯(libjavajpeg·liblcms·libfreetype·libfontmanager·libsplashscreen)을
+  같은 판 OpenJDK 소스(openjdk-jdk21u-jdk-21.0.12.1-ga.tar.gz, 소스는 한 글자도 고치지 않음)에 든 코덱으로 다시 지어 넣습니다
+  (바깥 라이브러리 없이, macOS 13.0 부터). 짓는 각본: [mac/build_jdk_native.sh](mac/build_jdk_native.sh).
+  From 1.0.0, the Mac app rebuilds five native libraries of that runtime (libjavajpeg, liblcms, libfreetype, libfontmanager,
+  libsplashscreen) from the same OpenJDK source (unmodified), using the codecs bundled in that source, with no external
+  libraries and a macOS 13.0 minimum. The build script is [mac/build_jdk_native.sh](mac/build_jdk_native.sh).
+- This software is based in part on the work of the Independent JPEG Group.
 - 아이패드판은 vmone 정적 라이브러리에서 머리글 없는 빈 조각 dummy.o 하나를 빼고 링크합니다(소스는 그대로).
   The iPad build removes one header-less stub object (dummy.o) from the vmone static library before linking; no source was changed.
 - 각 파일의 SHA-256 은 SHA256SUMS.txt 에 있습니다. / SHA-256 checksums are in SHA256SUMS.txt.
